@@ -31,6 +31,7 @@ ToJsonRegistry<ISimulatorStorage> & GetToJsonRegistry<ISimulatorStorage>()
 {
     static ToJsonRegistry<ISimulatorStorage> registry{
         { typeid(simulators::SimulatorFCV1Storage), ToJsonFuncTemplate<ISimulatorStorage, simulators::SimulatorFCV1Storage> },
+        { typeid(simulators::SimulatorFCV1Storage), ToJsonFuncTemplate<ISimulatorStorage, simulators::SimulatorFCV1LightStorage> },
     };
     return registry;
 }
@@ -40,6 +41,7 @@ FromJsonRegistry<ISimulatorStorage> & GetFromJsonRegistry<ISimulatorStorage>()
 {
     static FromJsonRegistry<ISimulatorStorage> registry{
         { std::string(simulators::kSimulatorFCV1Id), FromJsonFuncTemplate<ISimulatorStorage, simulators::SimulatorFCV1Storage> },
+        { std::string(simulators::kSimulatorFCV1LightId), FromJsonFuncTemplate<ISimulatorStorage, simulators::SimulatorFCV1LightStorage> },
     };
     return registry;
 }
