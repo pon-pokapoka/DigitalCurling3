@@ -20,28 +20,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "digitalcurling3/detail/i_simulator_storage.hpp"
-#include "simulators_simulator_fcv1_storage.hpp"
 #include "simulators_simulator_fcv1light_storage.hpp"
 
-namespace digitalcurling3::polymorphic_json::detail {
+#include "simulators_simulator_fcv1light.hpp"
 
-template <>
-ToJsonRegistry<ISimulatorStorage> & GetToJsonRegistry<ISimulatorStorage>()
+namespace digitalcurling3::simulators {
+
+SimulatorFCV1LightStorage::SimulatorFCV1LightStorage(SimulatorFCV1LightFactory const& factory)
+    : factory(factory)
+    , stones()
+    , collisions()
+{}
+
+std::unique_ptr<ISimulator> SimulatorFCV1LightStorage::CreateSimulator() const
 {
-    static ToJsonRegistry<ISimulatorStorage> registry{
-        { typeid(simulators::SimulatorFCV1Storage), ToJsonFuncTemplate<ISimulatorStorage, simulators::SimulatorFCV1Storage> },
-    };
-    return registry;
+    return std::make_unique<SimulatorFCV1Light>(*this);
 }
 
-template <>
-FromJsonRegistry<ISimulatorStorage> & GetFromJsonRegistry<ISimulatorStorage>()
+// json
+void to_json(nlohmann::json & j, SimulatorFCV1LightStorage const& v)
 {
-    static FromJsonRegistry<ISimulatorStorage> registry{
-        { std::string(simulators::kSimulatorFCV1Id), FromJsonFuncTemplate<ISimulatorStorage, simulators::SimulatorFCV1Storage> },
-    };
-    return registry;
+    j["type"] = kSimulatorFCV1LightId;
+    j["factory"] = v.factory;
+    j["stones"] = v.stones;
+    j["collisions"] = v.collisions;
 }
 
-} // namespace digitalcurling3::polymorphic_json::detail
+void from_json(nlohmann::json const& j, SimulatorFCV1LightStorage & v)
+{
+    j.at("factory").get_to(v.factory);
+    j.at("stones").get_to(v.stones);
+    j.at("collisions").get_to(v.collisions);
+}
+
+} // namespace digitalcurling3::simulators
