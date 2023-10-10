@@ -140,7 +140,7 @@ void SimulatorFCV1Light::Step()
 
     AdaptiveStep(storage_.factory.seconds_per_frame*100);
 
-    if (storage_.collisions){
+    if (!storage_.collisions.empty()){
         Load(pre_step_storage);
         for (auto i=0; i<100; ++i){
             AdaptiveStep(storage_.factory.seconds_per_frame);

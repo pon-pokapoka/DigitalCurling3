@@ -14,6 +14,7 @@ set(DIGITALCURLING3_INCLUDE_FILES
     "../include/digitalcurling3/detail/players/player_identical_factory.hpp"
     "../include/digitalcurling3/detail/players/player_normal_dist_factory.hpp"
     "../include/digitalcurling3/detail/simulators/simulator_fcv1_factory.hpp"
+    "../include/digitalcurling3/detail/simulators/simulator_fcv1light_factory.hpp"
     "../include/digitalcurling3/detail/apply_move.hpp"
     "../include/digitalcurling3/detail/constants.hpp"
     "../include/digitalcurling3/detail/coordinate.hpp"
@@ -65,6 +66,11 @@ set(DIGITALCURLING3_SOURCE_FILES
     "simulators_simulator_fcv1_storage.hpp"
     "simulators_simulator_fcv1.cpp"
     "simulators_simulator_fcv1.hpp"
+    "simulators_simulator_fcv1light_factory.cpp"
+    "simulators_simulator_fcv1light_storage.cpp"
+    "simulators_simulator_fcv1light_storage.hpp"
+    "simulators_simulator_fcv1light.cpp"
+    "simulators_simulator_fcv1light.hpp"
     "${CMAKE_CURRENT_BINARY_DIR}/version.cpp"  # generated from version.cpp.in
 )
 

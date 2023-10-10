@@ -46,7 +46,7 @@ public:
     virtual void SetStones(AllStones const& stones) override;
     virtual void Step() override;
 
-    void AdaptiveStep();
+    void AdaptiveStep(float);
 
     virtual AllStones const& GetStones() const override;
     virtual std::vector<Collision> const& GetCollisions() const override;
